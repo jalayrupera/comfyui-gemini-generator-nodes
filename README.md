@@ -1,4 +1,4 @@
-# ComfyUI Character Generator Nodes
+# ComfyUI Character Generation Nodes
 
 A collection of custom nodes for ComfyUI that uses Google's Gemini API to generate Character backstories and corresponding Stable Diffusion prompts for character portrait generation.
 
