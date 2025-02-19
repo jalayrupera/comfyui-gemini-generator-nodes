@@ -1,0 +1,6 @@
+{
+    "gemini_api_key": "AIzaSyDBMg60tmBeFL7BacBwl1clz3or3PcEC8w",
+    "model_name": "gemini-2.0-flash-lite-preview-02-05",
+    "default_narrative_depth": 3,
+    "default_dialogue_style": "casual"
+}
