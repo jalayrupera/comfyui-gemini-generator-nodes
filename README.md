@@ -12,11 +12,8 @@ A collection of custom nodes for ComfyUI that uses Google's Gemini API to genera
 ## Installation
 
 1. Install ComfyUI from the [official repository](https://github.com/comfyanonymous/ComfyUI)
-2. Clone this repository into your `custom_nodes` directory:
-```bash
-cd ComfyUI/custom_nodes
-git clone https://github.com/YourUsername/comfyui-npc-generator-nodes
-```
+2. Clone this repository into your `custom_nodes` directory.
+
 3. Create a `config.json` file in the root directory of the custom node:
 ```json
 {
