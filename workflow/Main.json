@@ -343,7 +343,7 @@
         "Node name for S&R": "KSampler"
       },
       "widgets_values": [
-        517297275506166,
+        500869469900543,
         "randomize",
         20,
         8,
@@ -432,6 +432,66 @@
       ]
     },
     {
+      "id": 13,
+      "type": "Display Any (rgthree)",
+      "pos": [
+        1481.5528564453125,
+        -125.04776763916016
+      ],
+      "size": [
+        269.99658203125,
+        117.52796173095703
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "dir": 3,
+          "link": 46
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "Display Any (rgthree)"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 22,
+      "type": "Display Any (rgthree)",
+      "pos": [
+        -59.19154357910156,
+        155.9542999267578
+      ],
+      "size": [
+        533.016357421875,
+        526.3912963867188
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "dir": 3,
+          "link": 34
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "Display Any (rgthree)"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
       "id": 25,
       "type": "BackstoryToPromptNode",
       "pos": [
@@ -480,37 +540,7 @@
       },
       "widgets_values": [
         "",
-        "anime",
-        ""
-      ]
-    },
-    {
-      "id": 13,
-      "type": "Display Any (rgthree)",
-      "pos": [
-        1481.5528564453125,
-        -125.04776763916016
-      ],
-      "size": [
-        269.99658203125,
-        117.52796173095703
-      ],
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "source",
-          "type": "*",
-          "dir": 3,
-          "link": 46
-        }
-      ],
-      "outputs": [],
-      "properties": {
-        "Node name for S&R": "Display Any (rgthree)"
-      },
-      "widgets_values": [
+        "realistic",
         ""
       ]
     },
@@ -523,7 +553,7 @@
       ],
       "size": [
         400,
-        240
+        264
       ],
       "flags": {},
       "order": 2,
@@ -553,41 +583,12 @@
       },
       "widgets_values": [
         "",
-        "Hero",
-        "friendly, honest",
-        "Forest",
-        3,
-        "casual",
-        ""
-      ]
-    },
-    {
-      "id": 22,
-      "type": "Display Any (rgthree)",
-      "pos": [
-        -59.19154357910156,
-        155.9542999267578
-      ],
-      "size": [
-        533.016357421875,
-        526.3912963867188
-      ],
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "source",
-          "type": "*",
-          "dir": 3,
-          "link": 34
-        }
-      ],
-      "outputs": [],
-      "properties": {
-        "Node name for S&R": "Display Any (rgthree)"
-      },
-      "widgets_values": [
+        "female",
+        "Scholar/Alchemist",
+        "brilliant, determined, eccentric",
+        "hidden laboratory/library",
+        4,
+        "intellectual",
         ""
       ]
     }
@@ -742,16 +743,17 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.6303940863128635,
+      "scale": 0.6303940863128513,
       "offset": [
-        -395.56053168160116,
-        215.5774426460739
+        -1117.4338074877658,
+        -67.43416854639372
       ]
     },
     "node_versions": {
       "comfy-core": "0.3.14",
       "comfyui_controlnet_aux": "1e9eac6377c882da8bb360c7544607036904362c",
-      "rgthree-comfy": "31b784bac495160436a8cd91bf1a856cf01a738e"
+      "rgthree-comfy": "31b784bac495160436a8cd91bf1a856cf01a738e",
+      "NPC_Gemini_Nodes": "7396eda6884f5bf7f743e4917ddf487cea680b8f"
     }
   },
   "version": 0.4

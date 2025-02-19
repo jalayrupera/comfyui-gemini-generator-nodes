@@ -60,12 +60,15 @@ Outputs:
 - `positive_prompt`: Generated positive prompt for Stable Diffusion
 - `negative_prompt`: Generated negative prompt for Stable Diffusion
 
-## Example Workflow
+## Example Generations
 
-1. Start with the NPC Backstory Generator node
-2. Connect its output to the Backstory to Prompt node
-3. Use the generated prompts with your preferred Stable Diffusion checkpoint
-4. Further refine the prompts if needed
+| Backstory | Parameters | Generated Image |
+|-----------|------------|-----------------|
+| Born in the harsh, unforgiving lowlands, Brutus learned early that survival meant strength. He was a scrawny kid, picked on relentlessly, until he found a mentor in a grizzled, retired gladiator. Under the man's brutal tutelage, Brutus transformed. He dedicated himself to rigorous training, sculpting his body into a mountain of muscle. His mentor instilled in him a code: protect the weak, and never back down from a fight, no matter the odds. Tragedy struck when a raiding party destroyed Brutus's village and killed his mentor. Filled with grief and rage, he swore to avenge them and to ensure no one else would suffer the same fate. He roams the land, a lone warrior, seeking out injustice and punishing evildoers. | **Gender**: Male<br>**Role:** Hero<br>**Traits:** muscular, aggressive<br>**Environment:** ground<br>**Art Style:** fantasy<br> | ![Brutus the Warrior](assets/1.png) |
+Zephyrin's true motives are known only to himself. Does he seek wealth, power, or something more esoteric? Whatever his goals, they are interwoven with his business. He sees his shop not just as a means of making a living, but as a stage to play out his machinations. He is careful to never display any signs of weakness. His cunning mind is perpetually calculating. He plays every interaction like a game of chess, always several steps ahead, making sure that the players in his game don't see the board. | **Gender**: Male<br>**Role:** Merchant<br>**Traits:** cunning, charismatic, mysterious<br>**Environment:** bustling marketplace<br>**Art Style:** painterly<br>| ![Zephyrin the Merchant](assets/2.png) |
+Artemisia’s research has not been without its challenges or moral compromises. She has made questionable decisions, and developed a certain detached perspective on the consequences of her actions. Some believe that the disappearance of the woman before her and the current manifestation of Dr. Thorne are two entirely separate entities. The lab itself is testament to this duality – a chaotic fusion of order and chaos, with meticulously organized shelves overflowing with ingredients and strange contraptions sitting amidst trails of spilled chemicals and arcane symbols scrawled onto every surface. The line between genius and madness is a fine one, and Artemisia walks it with a disconcerting ease, forever driven forward by the promise of breakthrough. | **Gender**: Female<br>**Role:** Scholar/Alchemist<br>**Traits:** brilliant, determined, eccentrics<br>**Environment:** hidden laboratory/library<br>**Art Style:** realistic<br> | ![Artemisia](assets/3.png)
+
+
 
 ## Configuration
 
