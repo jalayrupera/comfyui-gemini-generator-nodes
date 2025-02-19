@@ -5,7 +5,6 @@ This node generates NPC backstories and dialogue using Google's Gemini API
 
 import google.generativeai as genai
 import json
-import os
 from pathlib import Path
 
 
@@ -15,38 +14,48 @@ class GeminiBackStoryNode:
     """
 
     def __init__(self):
-        self.api_key = None
-        self.model = None
-        self.is_gemini_initialized = False
-        self.config = self.load_config()
+        print("Initializing GeminiBackStoryNode")
+        config = self.load_config()
+        print(f"Loaded config: {config}")
 
-        if self.config.get("gemini_api_key"):
-            self.initialize_gemini(self.config["gemini_api_key"])
+        api_key = config.get("gemini_api_key")
+        if not api_key:
+            print("No API key found in config")
+            self.model = None
+            return
+
+        try:
+            genai.configure(api_key=api_key)
+            self.model = genai.GenerativeModel(config.get("model_name", "gemini-pro"))
+            print("Successfully initialized Gemini model")
+        except Exception as e:
+            print(f"Error initializing Gemini: {str(e)}")
+            self.model = None
 
     @staticmethod
     def load_config():
         """Load configuration from json file"""
         try:
             config_path = Path(__file__).parent / "config.json"
+            print(f"Looking for config file at: {config_path}")
+
             if config_path.exists():
                 with open(config_path, "r") as f:
-                    return json.load(f)
+                    config = json.load(f)
+                    print("Successfully loaded config.json")
+                    return config
+            else:
+                print("Config file not found")
+                return {}
 
         except Exception as e:
             print(f"Error loading config: {str(e)}")
             return {}
 
-    RETURN_TYPES = (
-        "STRING",
-        "STRING",
-    )  # 1. Backstory, 2. Dialogue
-    RETURN_NAMES = (
-        "Backstory",
-        "Dialogue",
-    )
+    RETURN_TYPES = ("STRING", "STRING")
+    RETURN_NAMES = ("Backstory", "Dialogue")
     FUNCTION = "generate_character"
     OUTPUT_NODE = True
-
     CATEGORY = "NPC Backstory Generator"
 
     @classmethod
@@ -82,7 +91,7 @@ class GeminiBackStoryNode:
                     {
                         "default": "medieval town",
                         "multiline": False,
-                        "description": "Teh setting where the NPC lives/works",
+                        "description": "The setting where the NPC lives/works",
                     },
                 ),
                 "narrative_depth": (
@@ -115,19 +124,6 @@ class GeminiBackStoryNode:
             },
         }
 
-    def initialize_gemini(self, api_key: str) -> None:
-        """
-        Initialize the Gemini API with the provided API key
-        """
-        try:
-            genai.configure(api_key=api_key)
-            self.model = genai.GenerativeModel(self.config["model_name"])
-            self.api_key = api_key
-            self.is_gemini_initialized = True
-        except Exception as e:
-            print(f"Error initializing Gemini PI: {str(e)}")
-            self.is_gemini_initialized = False
-
     def generate_prompt(
         self,
         role: str,
@@ -140,8 +136,10 @@ class GeminiBackStoryNode:
         """
         Generate the prompt for Gemini API.
         """
+        if custom_prompt:
+            return custom_prompt
 
-        base_prompt = f"""
+        return f"""
         Create a detailed NPC character profile with the following specification:
         Role: {role}
         Personality Traits: {traits}
@@ -165,8 +163,6 @@ class GeminiBackStoryNode:
         }}
         """
 
-        return custom_prompt if custom_prompt else base_prompt
-
     def handle_api_error(self) -> tuple:
         """
         Return default response in case of API error
@@ -187,7 +183,6 @@ class GeminiBackStoryNode:
     def parse_response(self, response_text: str) -> tuple:
         """Parse the response text and extract backstory and dialogue."""
         try:
-            # Clean up markdown formatting if present
             if response_text.startswith("```json"):
                 response_text = response_text.replace("```json\n", "").replace(
                     "\n```", ""
@@ -234,9 +229,14 @@ class GeminiBackStoryNode:
         custom_prompt: str = "",
     ) -> tuple:
         try:
-            if not self.api_key or self.api_key != api_key:
-                if not self.is_gemini_initialized:
-                    return self.handle_api_error()
+            if api_key:
+                print("Using provided API key from input")
+                genai.configure(api_key=api_key)
+                self.model = genai.GenerativeModel("gemini-pro")
+
+            if not self.model:
+                print("No Gemini model available, using default response")
+                return self.handle_api_error()
 
             prompt = self.generate_prompt(
                 role=character_role,
@@ -247,12 +247,10 @@ class GeminiBackStoryNode:
                 custom_prompt=custom_prompt,
             )
 
-            response = self.model.generate_content(prompt).to_dict()
-            response_text = response["candidates"][0]["content"]["parts"][0]["text"]
+            response = self.model.generate_content(prompt)
+            response_text = response.text
 
             backstory, dialogue_lines = self.parse_response(response_text)
-
-            # print(backstory, "\n\n", dialogue_lines)
 
             return (
                 json.dumps(backstory)

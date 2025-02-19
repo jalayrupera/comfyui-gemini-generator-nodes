@@ -14,11 +14,18 @@ def get_gemini_api_key():
     try:
         p = os.path.dirname(os.path.realpath(__file__))
         config_path = os.path.join(p, "config.json")
+        print(f"Looking for config file at: {config_path}")
+
         with open(config_path, "r") as f:
             config = json.load(f)
-        return config.get("GEMINI_API_KEY", "")
-    except:
-        print("Error: API key not found in config.json")
+            api_key = config.get("gemini_api_key", "")
+            if api_key:
+                print("Successfully loaded API key from config.json")
+            else:
+                print("No API key found in config.json")
+            return api_key
+    except Exception as e:
+        print(f"Error loading config: {str(e)}")
         return ""
 
 
@@ -35,24 +42,18 @@ class BackstoryToPromptNode:
     )
 
     def __init__(self):
-        self.model = None
-        self.is_gemini_initialized = False
-        self.api_key = get_gemini_api_key()
-        if self.api_key:
-            self.initialize_gemini(self.api_key)
+        print("Initializing BackstoryToPromptNode")
+        api_key = get_gemini_api_key()
+        print(f"Got API key from config: {'Yes' if api_key else 'No'}")
 
-    def initialize_gemini(self, api_key: str) -> None:
-        """Initialize Gemini with API key"""
+        # Initialize Gemini right away
         try:
             genai.configure(api_key=api_key, transport="rest")
             self.model = genai.GenerativeModel("gemini-pro")
-            self.api_key = api_key
-            self.is_gemini_initialized = True
+            print("Successfully initialized Gemini model")
         except Exception as e:
             print(f"Error initializing Gemini: {str(e)}")
             self.model = None
-            self.api_key = None
-            self.is_gemini_initialized = False
 
     @classmethod
     def INPUT_TYPES(cls) -> Dict:
@@ -110,13 +111,13 @@ class BackstoryToPromptNode:
         """Generate text prompts from backstory using Gemini API"""
         try:
             if gemini_api_key:
-                if gemini_api_key != self.api_key:
-                    self.initialize_gemini(gemini_api_key)
-            elif not self.is_gemini_initialized:
-                if not self.api_key:
-                    print("No API key available. Using default prompts.")
-                    return self.get_default_prompts(art_style)
-                self.initialize_gemini(self.api_key)
+                print("Using provided API key from input")
+                genai.configure(api_key=gemini_api_key, transport="rest")
+                self.model = genai.GenerativeModel("gemini-pro")
+
+            if not self.model:
+                print("No Gemini model available, using default prompts")
+                return self.get_default_prompts(art_style)
 
             # Generate prompts using Gemini
             gemini_prompt = f"""
