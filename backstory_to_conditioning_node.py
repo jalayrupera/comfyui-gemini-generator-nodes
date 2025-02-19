@@ -109,7 +109,6 @@ class BackstoryToPromptNode:
     ) -> Tuple[str, str]:
         """Generate text prompts from backstory using Gemini API"""
         try:
-            # Use provided API key if given, otherwise use the one from config
             if gemini_api_key:
                 if gemini_api_key != self.api_key:
                     self.initialize_gemini(gemini_api_key)
@@ -163,7 +162,6 @@ class BackstoryToPromptNode:
                 print("Failed to parse Gemini response. Using default prompts.")
                 return self.get_default_prompts(art_style)
 
-            # Truncate prompts
             positive_prompt = self.truncate_prompt(positive_prompt)
             negative_prompt = self.truncate_prompt(negative_prompt, max_length=30)
 
