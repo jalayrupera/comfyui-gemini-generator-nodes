@@ -70,6 +70,13 @@ class GeminiBackStoryNode:
                         "description": "Google Gemini Key",
                     },
                 ),
+                "character_gender": (
+                    ["male", "female"], {
+                        "default": "female",
+                        "multiline": False,
+                        "description": "Character Gender"
+                    }
+                ),
                 "character_role": (
                     "STRING",
                     {
@@ -126,6 +133,7 @@ class GeminiBackStoryNode:
 
     def generate_prompt(
         self,
+        gender: str,
         role: str,
         traits: str,
         environment: str,
@@ -141,6 +149,7 @@ class GeminiBackStoryNode:
 
         return f"""
         Create a detailed NPC character profile with the following specification:
+        Gender: {gender}
         Role: {role}
         Personality Traits: {traits}
         Environment: {environment}
@@ -221,6 +230,7 @@ class GeminiBackStoryNode:
     def generate_character(
         self,
         api_key: str,
+        character_gender: str,
         character_role: str,
         personality_traits: str,
         environment: str,
@@ -239,6 +249,7 @@ class GeminiBackStoryNode:
                 return self.handle_api_error()
 
             prompt = self.generate_prompt(
+                gender=character_gender,
                 role=character_role,
                 traits=personality_traits,
                 environment=environment,
