@@ -753,7 +753,7 @@
       "comfy-core": "0.3.14",
       "comfyui_controlnet_aux": "1e9eac6377c882da8bb360c7544607036904362c",
       "rgthree-comfy": "31b784bac495160436a8cd91bf1a856cf01a738e",
-      "NPC_Gemini_Nodes": "7396eda6884f5bf7f743e4917ddf487cea680b8f"
+      "Character_Gemini_Nodes": "7396eda6884f5bf7f743e4917ddf487cea680b8f"
     }
   },
   "version": 0.4

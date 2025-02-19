@@ -1,6 +1,6 @@
 """
 Gemini Backstory Generator node for ComfyUI
-This node generates NPC backstories and dialogue using Google's Gemini API
+This node generates Character backstories and dialogue using Google's Gemini API
 """
 
 import google.generativeai as genai
@@ -10,7 +10,7 @@ from pathlib import Path
 
 class GeminiBackStoryNode:
     """
-    ComfyUI custom node for generating NPC backstories and dialogue using Google's Gemini API.
+    ComfyUI custom node for generating Character backstories and dialogue using Google's Gemini API.
     """
 
     def __init__(self):
@@ -56,7 +56,7 @@ class GeminiBackStoryNode:
     RETURN_NAMES = ("Backstory", "Dialogue")
     FUNCTION = "generate_character"
     OUTPUT_NODE = True
-    CATEGORY = "NPC Backstory Generator"
+    CATEGORY = "Character Backstory Generator"
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -82,7 +82,7 @@ class GeminiBackStoryNode:
                     {
                         "default": "merchant",
                         "multiline": False,
-                        "description": "The role/occupation of the NPC",
+                        "description": "The role/occupation of the Character",
                     },
                 ),
                 "personality_traits": (
@@ -98,7 +98,7 @@ class GeminiBackStoryNode:
                     {
                         "default": "medieval town",
                         "multiline": False,
-                        "description": "The setting where the NPC lives/works",
+                        "description": "The setting where the Character lives/works",
                     },
                 ),
                 "narrative_depth": (
@@ -115,7 +115,7 @@ class GeminiBackStoryNode:
                     {
                         "default": "casual",
                         "multiline": False,
-                        "description": "Style of NPC's Dialogue",
+                        "description": "Style of Character's Dialogue",
                     },
                 ),
             },
@@ -148,7 +148,7 @@ class GeminiBackStoryNode:
             return custom_prompt
 
         return f"""
-        Create a detailed NPC character profile with the following specification:
+        Create a detailed character profile with the following specification:
         Gender: {gender}
         Role: {role}
         Personality Traits: {traits}
@@ -279,4 +279,4 @@ class GeminiBackStoryNode:
 
 NODE_CLASS_MAPPINGS = {"GeminiBackstoryNode": GeminiBackStoryNode}
 
-NODE_DISPLAY_NAME_MAPPINGS = {"GeminiBackstoryNode": "Gemini NPC Backstory Generator"}
+NODE_DISPLAY_NAME_MAPPINGS = {"GeminiBackstoryNode": "Gemini Character Backstory Generator"}

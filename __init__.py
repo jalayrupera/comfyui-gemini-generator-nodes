@@ -1,5 +1,5 @@
 """
-Dynamic NPC Creation Pipeline Nodes for ComfyUI
+Dynamic Character Creation Pipeline Nodes for ComfyUI
 """
 
 from .gemini_backstory_node import NODE_CLASS_MAPPINGS as GEMINI_NODES, NODE_DISPLAY_NAME_MAPPINGS as GEMINI_DISPLAY_NAMES

@@ -31,7 +31,7 @@ def get_gemini_api_key():
 
 class BackstoryToPromptNode:
     """
-    Uses Gemini to convert NPC backstory into text prompts for Stable Diffusion
+    Uses Gemini to convert Character backstory into text prompts for Stable Diffusion
     """
 
     # Core set of essential negative prompts
@@ -76,7 +76,7 @@ class BackstoryToPromptNode:
     RETURN_NAMES = ("positive_prompt", "negative_prompt")
     FUNCTION = "generate_prompts"
     OUTPUT_NODE = True
-    CATEGORY = "NPC Generator"
+    CATEGORY = "Character Generator"
 
     def truncate_prompt(self, prompt: str, max_length: int = 60) -> str:
         """Truncate prompt to prevent token length issues"""
